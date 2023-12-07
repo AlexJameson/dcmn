@@ -9,6 +9,7 @@ output_file = 'test-output.txt'
 # Grammatical number = NMbr as per OpenCorpora
 numbers = ('sing', 'plur')
 
+# Gender = GNdr as per OpenCorpora
 genders = ('masc', 'femn', 'neut')
 
 # Case = CAse as per OpenCorpora
@@ -40,7 +41,7 @@ with open(output_file, 'w') as file_out:
                                 file_out.write(noun.word + '\n')
 
                 else:
-                    file_out.write('Failed to conjugate')
+                    file_out.write('Failed to process a noun' + processed_word.word + '\n')
 
             elif processed_word.tag.POS == 'INFN':
                 # Process infinitive verbs
