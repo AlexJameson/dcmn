@@ -20,12 +20,12 @@ persons = ('1per', '2per', '3per')
 # Verb mood = MOod as per OpenCorpora
 # moods = ('indc', 'impr')
 
-def process_input_and_transform(input_path, output_path):
+def process_and_transform(input_file_path, output_file_path):
 
     # Open the output file in write mode
-    with open(output_path, 'w') as file_out:
+    with open(output_file_path, 'w') as file_out:
         # Process each word and write the result to the common output file
-        with open(input_path, 'r') as file_in:
+        with open(input_file_path, 'r') as file_in:
             # Read the contents of the input file
             words = file_in.read().splitlines()
             for word in words:
@@ -68,8 +68,3 @@ def process_input_and_transform(input_path, output_path):
                 else:
                     file_out.write('Failed to parse the following word: ' + processed_word.word + '\n')
 
-if __name__ == "__main__":
-    input_file_path = input("Enter the path to the input file: ")
-    output_file_path = input("Enter the path to the resulting dictionary: ")
-
-    process_input_and_transform(input_file_path, output_file_path)
