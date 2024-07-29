@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 import argparse
-import sys
 from insert_module import insert_strings
 from process_and_transform_module import process_and_transform
 from trim_module import remove_duplicates_and_failed_transformations
+from merge_module import merge_dictionaries
 
 def main():
     parser = argparse.ArgumentParser(prog="dcmn", description="Utility to manage vocabularies.")
@@ -16,10 +16,14 @@ def main():
     
     parser_transform = subparsers.add_parser('transform', help='Inflect and conjugate words from a file.')
     parser_transform.add_argument('input_file_path', type=str, help='The file from which to get strings.')
-    parser_transform.add_argument('output_file_path', type=str, help='The file from where to insert processed and transformed strings.')
+    parser_transform.add_argument('output_file_path', type=str, help='The file where to insert processed and transformed strings.')
 
     parser_trim = subparsers.add_parser('trim', help='Remove duplicates from a file.')
     parser_trim.add_argument('file_path', type=str, help='The file where strings will be inserted.')
+    
+    parser_merge = subparsers.add_parser('merge', help='Inflect and conjugate words from a file.')
+    parser_merge.add_argument('input_file_path', type=str, help='The file from which to get words.')
+    parser_merge.add_argument('output_file_path', type=str, help='The file where to insert the merge result.')
 
     args = parser.parse_args()
 
@@ -29,6 +33,8 @@ def main():
         process_and_transform(args.input_file_path, args.output_file_path)
     if args.command == 'trim':
         remove_duplicates_and_failed_transformations(args.file_path)
+    if args.command == 'merge':
+        merge_dictionaries(args.input_file_path, args.output_file_path)
     else:
         parser.print_help()
 

@@ -23,9 +23,3 @@ def merge_dictionaries(new_dict, existing_dict):
 
     write_words(existing_dict, new_words_list)
 
-
-if __name__ == "__main__":
-    input_file_path = input("Enter the path to the file containing new words: ")
-    output_file_path = input("Enter the path to the target dictionary: ")
-
-    merge_dictionaries(input_file_path, output_file_path)
