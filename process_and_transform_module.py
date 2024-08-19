@@ -44,7 +44,7 @@ def process_and_transform(input_file_path, output_file_path):
 
                 elif processed_word.tag.POS == 'INFN':
                     if processed_word:
-                        file_out.write(processed_word + '\n')
+                        file_out.write(processed_word.word + '\n')
                         for person in persons:
                             for num in numbers:
                                 verb = processed_word.inflect({num, person})
