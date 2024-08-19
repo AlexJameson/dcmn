@@ -4,9 +4,10 @@ from insert_module import insert_strings
 from process_and_transform_module import process_and_transform
 from trim_module import remove_duplicates_and_failed_transformations
 from merge_module import merge_dictionaries
+from transform_single_module import process_word
 
 def main():
-    parser = argparse.ArgumentParser(prog="dcmn", description="Utility to manage vocabularies.")
+    parser = argparse.ArgumentParser(prog="dcmn", description="Utility to manage dictionaries.")
     subparsers = parser.add_subparsers(dest="command", help="Sub-command help")
 
     parser_insert = subparsers.add_parser('insert', help='Insert new words into a file.')
@@ -25,6 +26,12 @@ def main():
     parser_merge.add_argument('input_file_path', type=str, help='The file from which to get words.')
     parser_merge.add_argument('output_file_path', type=str, help='The file where to insert the merge result.')
 
+    parser_inflect = subparsers.add_parser('inflect', help='Inflect words into possible forms.')
+    parser_inflect.add_argument('words', type=str, nargs='+', help='Words to inflect.')
+
+    parser_inflect.add_argument('--remove-duplicates', action='store_true', help='Remove duplicate inflections.')
+
+
     args = parser.parse_args()
 
     if args.command == 'insert':
@@ -35,6 +42,14 @@ def main():
         remove_duplicates_and_failed_transformations(args.file_path)
     if args.command == 'merge':
         merge_dictionaries(args.input_file_path, args.output_file_path)
+    if args.command == 'inflect':
+        for word in args.words:
+            results = process_word(word, args.remove_duplicates)
+            print(f"Inflections for '{word}':")
+            for result in results:
+                print(result)
+            print()
+
     else:
         parser.print_help()
 
