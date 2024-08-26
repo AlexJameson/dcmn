@@ -1,3 +1,4 @@
+import os
 import pymorphy3
 
 morph = pymorphy3.MorphAnalyzer()
@@ -21,6 +22,30 @@ persons = ('1per', '2per', '3per')
 # moods = ('indc', 'impr')
 
 def process_and_transform(input_file_path, output_file_path):
+
+    # Check if the input file exists
+    if not os.path.exists(input_file_path):
+        print(f"Error: Input file at '{input_file_path}' does not exist.")
+        return
+
+    # Optionally, you could also check for output file path issues like non-writable directories
+    output_dir = os.path.dirname(output_file_path)
+    if output_dir and not os.path.exists(output_dir):
+        print(f"Error: Output directory '{output_dir}' does not exist.")
+        return
+    if output_dir and not os.access(output_dir, os.W_OK):
+        print(f"Error: Output directory '{output_dir}' is not writable.")
+        return
+
+    # If output file exists, decide if overwrite is allowed or a warning should be given
+    if os.path.exists(output_file_path):
+        # If not wanting to overwrite automatically, prompt or log a message
+        print(f"Warning: Output file '{output_file_path}' already exists and will be overwritten.")
+        
+    # Proceed with file processing and writing to output
+    # Place here your actual processing logic
+    print(f"Processing {input_file_path} and saving results to {output_file_path}")
+
 
     # Open the output file in write mode
     with open(output_file_path, 'w') as file_out:

@@ -1,10 +1,22 @@
-def remove_duplicates_and_failed_transformations(file_path):
+import os
+
+def remove_duplicates_and_failed_transformations(file_path, should_sort=False):
+    if not os.path.exists(file_path):
+        print(f"Error: The file at path '{file_path}' does not exist.")
+        return
+    # Continue with your existing code to process the file
+    print(f"Processing file: {file_path}")
+    # [Existing file processing logic] ...
+
     # Set to store unique lines
     unique_lines = set()
 
     # Open the file for reading
     with open(file_path, 'r') as file:
         lines = file.readlines()
+
+    if should_sort:
+        lines = sorted(lines)
 
     # Trim lines, remove empty lines and "Failed to" lines, and filter duplicates
     trimmed_lines = 0
