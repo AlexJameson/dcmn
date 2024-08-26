@@ -6,8 +6,8 @@ This CLI utility is specifically designed to manage dictionaries that aid variou
 
 ## Requirements
 
-- Python 3
-- pymorphy3: `pip install pymorphy3`
+- `Python 3`
+- `pymorphy3`: `pip install pymorphy3`
 
 ## Description
 
@@ -21,44 +21,44 @@ This CLI utility is specifically designed to manage dictionaries that aid variou
 
 ## CLI Command Reference
 
-- **Insert Words**
-  
-  `insert <file_path> <words> [--allow-duplicates][--create]`
-  
-  Inserts words into the specified dictionary file. Allows creating a file if it doesn't exist, disabled by default.
-
-- **Transform Words**
+### transform
   
   `transform <input_file_path> <output_file_path>`
   
-  Applies morphological transformation on words from a file at input_file_path and outputs to output_file_path.
+  Applies morphological transformation on words from a file at input_file_path and outputs to output_file_path. Words in the source file should be infinitives.
 
-- **Trim Dictionary**
+### inflect
+
+  `inflect <words> [--remove-duplicates]`
+  
+  Generates possible inflections of the provided words and optionally removes duplicates among them. This function accepts words from stdin. The words should be infinitives.
+
+### insert
+  
+  `insert <file_path> <words> [--allow-duplicates][--create]`
+  
+  Inserts words into the specified dictionary file and sorts the contents alphabetically. Allows creating a file if it doesn't exist, disabled by default.
+
+### trim
 
   `trim <file_path> [--sort]`
   
   Removes duplicate words from the dictionary. Can also sort the dictionary if specified.
 
-- **Inflect Words**
+### get_info
 
-  `inflect <words> [--remove-duplicates]`
-  
-  Generates possible inflections of the provided words and optionally removes duplicates among them. This function accepts words from stdin.
-
-- **Check Dictionary**
-
-  `check <file_path>`
+  `get_info <file_path>`
   
   Provides information about the size of the dictionary and checks for duplicates.
 
-- **Sort Dictionary Contents**
+### sort
 
   `sort <file_path>`
   
   Orders the contents of the dictionary alphabetically.
 
-- **Download Latest Dictionary**
+### download_sdd
   
   `download_sdd [--path <download_path>]`
   
-  Downloads the latest release of [software-development-dictionary-ru](https://github.com/AlexJameson/software-development-dictionary-ru) release from GitHub. Default download path is the current working directory unless specified.
+  Downloads the latest release of [software-development-dictionary-ru](https://github.com/AlexJameson/software-development-dictionary-ru) from GitHub. Default download path is the current working directory unless specified.

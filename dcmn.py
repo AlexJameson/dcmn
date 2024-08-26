@@ -31,7 +31,7 @@ def main():
 
     parser_inflect.add_argument('--remove-duplicates', action='store_true', help='Remove duplicate inflections.')
 
-    parser_check = subparsers.add_parser('check', help='Get the number of lines and check for duplicates.')
+    parser_check = subparsers.add_parser('get_info', help='Get the number of lines and check for duplicates.')
     parser_check.add_argument('file_path', type=str, help='The file to check.')
     
     parser_sort = subparsers.add_parser('sort', help='Sort file contents.')
@@ -49,7 +49,7 @@ def main():
         process_and_transform(args.input_file_path, args.output_file_path)
     if args.command == 'trim':
         remove_duplicates_and_failed_transformations(args.file_path, args.sort)
-    if args.command == 'check':
+    if args.command == 'get_info':
         get_file_statistics(args.file_path)
     if args.command == 'sort':
         sort_file_contents(args.file_path)
